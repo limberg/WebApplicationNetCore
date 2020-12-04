@@ -15,10 +15,10 @@ namespace WebAPI
 
         private readonly ILogger _logger;
 
-        public MyMiddleware(RequestDelegate next, ILogger logger)
+        public MyMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
         {
             _next = next;
-            _logger = logger;
+            _logger = loggerFactory.CreateLogger<MyMiddleware>();
         }
 
         public async Task Invoke(HttpContext httpContext)

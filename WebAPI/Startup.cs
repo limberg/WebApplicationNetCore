@@ -35,9 +35,6 @@ namespace WebAPI
                 options.Filters.Add(new HttpResponseExceptionFilter());
             });
 
-            //var serviceProvider = services.BuildServiceProvider().;
-            var logger = services.BuildServiceProvider().GetService<ILogger<MyMiddleware>>();
-            services.AddSingleton(typeof(ILogger), logger);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
