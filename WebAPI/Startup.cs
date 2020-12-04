@@ -63,11 +63,6 @@ namespace WebAPI
                 RequestPath = new PathString("/app-images")
             });
 
-
-
-            //MyMidleware created 
-            app.UseMyMiddleware();
-
             //Error when some page or controller doesn't exist
             app.UseStatusCodePages("text/html", "<h1>Status code page</h1> <h2>Status Code: {0}</h2>");
 
@@ -76,6 +71,9 @@ namespace WebAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //Custom MyMidleware created 
+            app.UseMyMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
