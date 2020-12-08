@@ -16,11 +16,25 @@ namespace WebApplication
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var switchMapping = new Dictionary<string, string>()
+            {
+                {"-k1", "key1" },
+                {"-k2", "key2" },
+                {"--alt3", "key3" }
+            };
+
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    //config.AddEnvironmentVariables(prefix: "MyCustomPrefix_");
+                    config.AddCommandLine(args, switchMapping);
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+        }
     }
 }
